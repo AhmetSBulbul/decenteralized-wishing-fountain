@@ -42,39 +42,39 @@ const Home: NextPage = () => {
     checkIfWalletIsConnected();
   }, []);
 
-  const renderConnectedContainer = () => {
-
+  const lottiePlayer = (src:string) => {
     return (
-      <div className='flex flex-col items-center justify-center py-2'>
-        <Player
+      <Player
           autoplay
           loop
-          src="https://assets10.lottiefiles.com/packages/lf20_cgbssox3.json"
+          src={src}
           className='my-auto'
         ><Controls visible={false} buttons={['play', 'repeat', 'frame', 'debug']} />
 
         </Player>
+    )
+  }
+
+  const renderConnectedContainer = () => {
+
+    return (
+      <div className='flex flex-col items-center justify-center py-2'>
+       {lottiePlayer("https://assets10.lottiefiles.com/packages/lf20_cgbssox3.json")}
       </div>
     )
   }
 
   const renderNotConnectedContainer = () => {
     return (
-      <div className='flex flex-col items-center content-center justify-center h-full py-2 md:flex-row'>
-        <div className='flex-1 my-auto'>
-          <Player
-            autoplay
-            loop
-            src="https://assets9.lottiefiles.com/packages/lf20_xUyFWi.json"
-            className='my-auto w-1/2'
-          ><Controls visible={false} buttons={['play', 'repeat', 'frame', 'debug']} />
-
-          </Player>
+      <div className='flex flex-col h-3/4 py-2 md:flex-row'>
+        <div className='flex flex-col flex-1 justify-center mb-48 py-2 px-8 space-y-12'>
+          <h1 className='text-3xl font-bold'>Metamask Wallet is Required to Drop Some Coins!</h1>
+          <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md my-2 text-xl ml-auto'>Connect Wallet</button>
         </div>
-        <div className='flex flex-col flex-1 items-center justify-center py-2 space-y-12'>
-          <h1 className='text-3xl font-bold w-3/4'>Metamask Wallet is Required to Drop Some Coins!</h1>
-          <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md my-2 text-xl'>Connect Wallet</button>
+        <div className='flex-1 my-auto flex justify-end h-full items-end mt-auto'>
+          <div className='w-4/5'>{lottiePlayer("https://assets9.lottiefiles.com/packages/lf20_xUyFWi.json")}</div>
         </div>
+        
       </div>
     )
   }
@@ -84,7 +84,7 @@ const Home: NextPage = () => {
 
 
   return (
-    <div className='container mx-auto h-screen relative'>
+    <div className='mx-auto h-screen relative max-w-6xl'>
       <Navbar />
       {currentAccount === "" ? renderNotConnectedContainer() : renderConnectedContainer()}
       <div className='absolute bottom-0 w-full left-0 flex items-center justify-center py-4'>Developed by github.com/AhmetSBulbul</div>
